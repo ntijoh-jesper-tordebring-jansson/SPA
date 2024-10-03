@@ -53,7 +53,6 @@ class CardBoard extends HTMLElement {
 
 
               `;
-
     return template;
   }
 }
