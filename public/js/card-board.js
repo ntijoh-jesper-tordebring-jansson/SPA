@@ -1,3 +1,5 @@
+import { Api } from "./api";
+
 class CardBoard extends HTMLElement {
   constructor() {
     super();

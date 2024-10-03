@@ -16,4 +16,4 @@ class Api {
 
 }
 
-export { Api }
+export { Api };
