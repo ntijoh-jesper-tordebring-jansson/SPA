@@ -18,13 +18,7 @@ class Server < Sinatra::Base
     set :protection, false
 
     get '/' do
-        erb :index
-    end
-
-    get '/slow' do
-        content_type :json
-        sleep 2
-        return {result: 'slow'}.to_json
+        redirect('/app');
     end
 
     # Build the app using this route to deliver js for the SPA.
@@ -99,8 +93,5 @@ class Server < Sinatra::Base
         result = @db.execute('DELETE FROM employees WHERE id = ?', params['id'])
         return {result: 'success'}.to_json
     end
-
-
-
 
 end
