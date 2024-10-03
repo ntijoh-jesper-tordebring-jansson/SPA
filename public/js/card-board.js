@@ -24,6 +24,7 @@ class CardBoard extends HTMLElement {
         </employee-card>
       </div>
             `;
+    return template;
   }
 }
 
