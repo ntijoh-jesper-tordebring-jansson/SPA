@@ -1,8 +1,9 @@
 class EmployeeCard extends HTMLElement {
-  constructor() {
+  constructor(id) {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(this.#template().content.cloneNode(true));
+    this.id = id;
   }
 
   #template() {

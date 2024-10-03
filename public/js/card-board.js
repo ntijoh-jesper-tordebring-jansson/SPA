@@ -1,4 +1,4 @@
-import { Api } from "./api";
+import { Api } from "./api.js";
 
 class CardBoard extends HTMLElement {
   constructor() {
@@ -9,7 +9,8 @@ class CardBoard extends HTMLElement {
   }
 
   connectedCallback() {
-    for (let i = 0; i < 10; i++) {
+    const employees = Api.index();
+    for (let i = 0; i < employees.length; i++) {
       this.div.appendChild(new EmployeeCardCard(i));
     }
   }
@@ -18,8 +19,6 @@ class CardBoard extends HTMLElement {
     const template = document.createElement("template");
     template.innerHTML = `
       <div>
-        <employee-card>
-        </employee-card>
       </div>
             `;
   }
