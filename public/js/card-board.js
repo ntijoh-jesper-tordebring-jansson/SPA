@@ -6,10 +6,12 @@ class CardBoard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(this.#template().content.cloneNode(true));
     this.div = this.shadowRoot.querySelector("div");
+    console.log(new Api().index());
   }
 
-  connectedCallback() {
-    const employees = Api.index();
+  async connectedCallback() {
+    const api = new Api();
+    const employees = await api.index();
     for (let i = 0; i < employees.length; i++) {
       this.div.appendChild(new EmployeeCardCard(i));
     }

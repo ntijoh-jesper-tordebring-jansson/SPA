@@ -1,4 +1,4 @@
-export class Api {
+class Api {
   async loaddedd() {
     const result = await index();
     result.forEach((element) => {
@@ -12,3 +12,5 @@ export class Api {
     return result;
   }
 }
+
+export { Api };
