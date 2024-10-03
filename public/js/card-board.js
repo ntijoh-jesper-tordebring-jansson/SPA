@@ -1,4 +1,4 @@
-import { Api } from "./api";
+import { Api } from "./api.js";
 
 class CardBoard extends HTMLElement {
   constructor() {
@@ -6,9 +6,11 @@ class CardBoard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(this.#template().content.cloneNode(true));
     this.div = this.shadowRoot.querySelector("div");
+    console.log(new Api().index());
   }
 
   connectedCallback() {
+
     for (let i = 0; i < 10; i++) {
       this.div.appendChild(new EmployeeCardCard(i));
     }

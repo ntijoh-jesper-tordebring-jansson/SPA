@@ -13,7 +13,6 @@ class Api {
       return result;
    }
 
-
 }
 
 export { Api };
