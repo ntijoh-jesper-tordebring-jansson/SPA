@@ -5,7 +5,7 @@ class AddEmployeeCard extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(this.#template().content.cloneNode(true));
-    this.fileInput = this.shadowRoot.querySelector("#file-input");
+    this.fileInput = this.shadowRoot.querySelector("#fileInput");
     this.imageButton = this.shadowRoot.querySelector("#image-button");
     this.form = this.shadowRoot.querySelector("form");
   }
@@ -35,9 +35,10 @@ class AddEmployeeCard extends HTMLElement {
       const name = this.shadowRoot.querySelector("#name").value;
       const email = this.shadowRoot.querySelector("#email").value;
       const phone = this.shadowRoot.querySelector("#phone").value;
-      const departmentId =
-        this.shadowRoot.querySelector("#department_id").value;
-      const file = this.shadowRoot.querySelector("#file-input").file;
+      const departmentId = this.shadowRoot.querySelector("#department_id").value;
+      const file = document.getElementById('fileInput').files[0];
+      
+
 
       this.#upload(name, email, phone, departmentId, file);
     });
@@ -45,7 +46,7 @@ class AddEmployeeCard extends HTMLElement {
 
   async #upload(name, email, phone, departmentId, file) {
     const api = new Api();
-    await api.add(name, email, phone, departmentId, file);
+    await api.add(name, email, phone, departmentId, file);;
   }
 
   #template() {
@@ -53,7 +54,7 @@ class AddEmployeeCard extends HTMLElement {
     template.innerHTML = `
 
       <style>
-              #file-input {
+              #fileInput {
                   display: none;
               }
 
@@ -72,7 +73,7 @@ class AddEmployeeCard extends HTMLElement {
           <input class='department_id' id='department_id' placeholder="Department ID"></input>
 
           <img id="image-button" src="img/add image here.png" alt="Add Image" />
-          <input type="file" id="file-input" accept="image/*">
+          <input type="file" id="fileInput" accept="image/*">
 
           <button class="submit-button" id="submit-button">Lägg till</button>
 

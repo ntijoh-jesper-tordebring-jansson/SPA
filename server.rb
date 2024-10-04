@@ -77,31 +77,74 @@ class Server < Sinatra::Base
         return {result: 'success'}.to_json
     end
 
-    #create
+
+
+
     post '/api/employees/' do
-
         uploadDir = './public/img/'
-
+      
         name = params['name']
         mail = params['mail']
         phone = params['phone']
         department_id = params['department_id']
-        file = params['file']
         
-        # filename = "#{next_id}.png"
+        file = params['file'] # Det här hämtar filinformationen som ett Hash-objekt
+      
+        if file && file[:tempfile] # Kontrollera att filen och tempfilen finns
+          filename = file[:filename] || "hej.jpg"  # Om inget filnamn finns, använd "hej.jpg"
+          tempfile = file[:tempfile]               # Tempfilen där filen lagras temporärt
+      
+          # Sökvägar
+          filepath = File.join(uploadDir, filename)
+          relpath = "/img/#{filename}"
+      
+          # Kopiera filen från tempfilen till slutdestinationen
+          FileUtils.cp(tempfile.path, filepath)
+      
+          status 200
+          return { message: 'File uploaded successfully', path: relpath }.to_json
+        else
+          status 400
+          return { error: 'No file uploaded' }.to_json
+        end
+      end
 
-        # uuid.
+
+
+    #create
+    # post '/api/employees/' do
+
+    #     uploadDir = './public/img/'
+
+    #     name = params['name']
+    #     mail = params['mail']
+    #     phone = params['phone']
+    #     department_id = params['department_id']
+    #     file = params['file']
+    #     filename = "hej.jpg"
+
+    #     tempfile = file['tempfile']
+
+
+    #     filepath = File.join(uploadDir, filename)
+    #     relpath = "/img/#{filename}"
+
+    #     FileUtils.cp(tempfile.path, filepath)
+        
+    #     # filename = "#{next_id}.png"
+
+    #     # uuid.
 
         
 
-        # payload = JSON.parse request.body.read
+    #     # payload = JSON.parse request.body.read
 
-        # content_type :json
-        # result = @db.execute('INSERT into employees (name, email, phone, department_id, img)
-        #                       VALUES (?,?,?,?,?)',[
-        #                       payload['name'], payload['email'], payload['phone'], payload['department_id'], payload['img']])
-        # return {result: 'success'}.to_json
-    end
+    #     # content_type :json
+    #     # result = @db.execute('INSERT into employees (name, email, phone, department_id, img)
+    #     #                       VALUES (?,?,?,?,?)',[
+    #     #                       payload['name'], payload['email'], payload['phone'], payload['department_id'], payload['img']])
+    #     # return {result: 'success'}.to_json
+    # end
 
     #destroy
     delete '/api/employees/:id' do
