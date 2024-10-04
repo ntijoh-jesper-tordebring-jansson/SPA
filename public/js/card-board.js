@@ -1,4 +1,5 @@
 import { Api } from "./api.js";
+import { AddEmployeeCard } from "./add-employee.js";
 
 class CardBoard extends HTMLElement {
   constructor() {

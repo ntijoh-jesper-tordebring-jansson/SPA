@@ -6,6 +6,7 @@ class Api {
   }
 
   async add(name, mail, phone, department_id, file) {
+    console.log("Working on uploading...");
     const formName = name;
     const formMail = mail;
     const formPhone = phone;
@@ -14,20 +15,19 @@ class Api {
 
     let formData = new FormData();
 
-    formData.append('name', name);
-    formData.append('mail', mail);
-    formData.append('phone', phone);
-    formData.append('department_id', department_id);
-    formData.append('file', file);
+    formData.append("name", name);
+    formData.append("mail", mail);
+    formData.append("phone", phone);
+    formData.append("department_id", department_id);
+    formData.append("file", file);
 
     try {
-        const response = await fetch('http://localhost:9292/api/employees/', {
-            method: 'POST',
-            body: formData
-        });
-    }
-    catch(error) {
-        console.error(error);
+      const response = await fetch("http://localhost:9292/api/employees/", {
+        method: "POST",
+        body: formData,
+      });
+    } catch (error) {
+      console.error(error);
     }
   }
 }

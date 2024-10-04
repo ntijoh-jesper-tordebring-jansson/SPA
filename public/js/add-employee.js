@@ -39,9 +39,13 @@ class AddEmployeeCard extends HTMLElement {
         this.shadowRoot.querySelector("#department_id").value;
       const file = this.shadowRoot.querySelector("#file-input").file;
 
-      const api = new Api();
-      api.add(name, email, phone, departmentId, file);
+      this.#upload(name, email, phone, departmentId, file);
     });
+  }
+
+  async #upload(name, email, phone, departmentId, file) {
+    const api = new Api();
+    await api.add(name, email, phone, departmentId, file);
   }
 
   #template() {
@@ -70,7 +74,7 @@ class AddEmployeeCard extends HTMLElement {
           <img id="image-button" src="img/add image here.png" alt="Add Image" />
           <input type="file" id="file-input" accept="image/*">
 
-          <button class="submit-button" id="submit=button">Lägg till</button>
+          <button class="submit-button" id="submit-button">Lägg till</button>
 
         </form>
       </div>
@@ -78,5 +82,7 @@ class AddEmployeeCard extends HTMLElement {
     return template;
   }
 }
+
+export { AddEmployeeCard };
 
 window.customElements.define("add-employee-card", AddEmployeeCard);
