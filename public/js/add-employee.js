@@ -7,6 +7,7 @@ class AddEmployeeCard extends HTMLElement {
     this.shadowRoot.appendChild(this.#template().content.cloneNode(true));
     this.fileInput = this.shadowRoot.querySelector("#file-input");
     this.imageButton = this.shadowRoot.querySelector("#image-button");
+    this.form = this.shadowRoot.querySelector("form");
   }
 
   connectedCallback() {
@@ -34,7 +35,8 @@ class AddEmployeeCard extends HTMLElement {
       const name = this.shadowRoot.querySelector("#name").value;
       const email = this.shadowRoot.querySelector("#email").value;
       const phone = this.shadowRoot.querySelector("#phone").value;
-      const departmentId = this.shadowRoot.querySelector("#department_id").value;
+      const departmentId =
+        this.shadowRoot.querySelector("#department_id").value;
       const file = this.shadowRoot.querySelector("#file-input").file;
 
       const api = new Api();
