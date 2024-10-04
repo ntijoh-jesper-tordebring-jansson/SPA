@@ -35,9 +35,9 @@ class AddEmployeeCard extends HTMLElement {
       const name = this.shadowRoot.querySelector("#name").value;
       const email = this.shadowRoot.querySelector("#email").value;
       const phone = this.shadowRoot.querySelector("#phone").value;
-      const departmentId =
-        this.shadowRoot.querySelector("#department_id").value;
+      const departmentId = this.shadowRoot.querySelector("#department_id").value;
       const file = this.shadowRoot.querySelector("#file-input").files[0];
+
 
       this.#upload(name, email, phone, departmentId, file);
 
@@ -52,7 +52,7 @@ class AddEmployeeCard extends HTMLElement {
 
   async #upload(name, email, phone, departmentId, file) {
     const api = new Api();
-    await api.add(name, email, phone, departmentId, file);
+    await api.add(name, email, phone, departmentId, file);;
   }
 
   #template() {
