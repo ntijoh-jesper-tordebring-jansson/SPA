@@ -1,4 +1,5 @@
 require 'debug'
+require 'uuid'
 # use binding.break for debug
 
 class Server < Sinatra::Base
@@ -34,15 +35,15 @@ class Server < Sinatra::Base
         @db.execute('SELECT * FROM employees').to_json
     end
 
-    #new
-    get '/api/employees/new' do
-        content_type :json
-        {formFields: [{name:  'text'},
-                  {email: 'text'},
-                  {phone: 'tel'},
-                  {department_id: 'number'},
-                  {img:  'image'}]}.to_json
-    end
+    # #new
+    # get '/api/employees/new' do
+    #     content_type :json
+    #     {formFields: [{name:  'text'},
+    #               {email: 'text'},
+    #               {phone: 'tel'},
+    #               {department_id: 'number'},
+    #               {img:  'image'}]}.to_json
+    # end
 
     #show
     get '/api/employees/:id' do
@@ -78,13 +79,28 @@ class Server < Sinatra::Base
 
     #create
     post '/api/employees/' do
-        payload = JSON.parse request.body.read
 
-        content_type :json
-        result = @db.execute('INSERT into employees (name, email, phone, department_id, img)
-                              VALUES (?,?,?,?,?)',[
-                              payload['name'], payload['email'], payload['phone'], payload['department_id'], payload['img']])
-        return {result: 'success'}.to_json
+        uploadDir = './public/img/'
+
+        name = params['name']
+        mail = params['mail']
+        phone = params['phone']
+        department_id = params['department_id']
+        file = params['file']
+        
+        # filename = "#{next_id}.png"
+
+        # uuid.
+
+        
+
+        # payload = JSON.parse request.body.read
+
+        # content_type :json
+        # result = @db.execute('INSERT into employees (name, email, phone, department_id, img)
+        #                       VALUES (?,?,?,?,?)',[
+        #                       payload['name'], payload['email'], payload['phone'], payload['department_id'], payload['img']])
+        # return {result: 'success'}.to_json
     end
 
     #destroy
