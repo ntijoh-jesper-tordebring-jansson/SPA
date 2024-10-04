@@ -37,7 +37,7 @@ class AddEmployeeCard extends HTMLElement {
       const phone = this.shadowRoot.querySelector("#phone").value;
       const departmentId =
         this.shadowRoot.querySelector("#department_id").value;
-      const file = this.shadowRoot.querySelector("#file-input").file;
+      const file = this.shadowRoot.querySelector("#file-input").files[0];
 
       this.#upload(name, email, phone, departmentId, file);
 
