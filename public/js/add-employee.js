@@ -41,6 +41,13 @@ class AddEmployeeCard extends HTMLElement {
 
 
       this.#upload(name, email, phone, departmentId, file);
+
+      this.shadowRoot.querySelector("#name").value = "";
+      this.shadowRoot.querySelector("#email").value = "";
+      this.shadowRoot.querySelector("#phone").value = "";
+      this.shadowRoot.querySelector("#department_id").value = "";
+      this.shadowRoot.querySelector("#file-input").file = "";
+      this.imageButton.src = "img/add image here.png";
     });
   }
 
