@@ -1,6 +1,6 @@
 import { Api } from "./api.js";
 
-class AddEmployeeCard extends HTMLElement {
+export class AddEmployeeCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -35,9 +35,9 @@ class AddEmployeeCard extends HTMLElement {
       const name = this.shadowRoot.querySelector("#name").value;
       const email = this.shadowRoot.querySelector("#email").value;
       const phone = this.shadowRoot.querySelector("#phone").value;
-      const departmentId = this.shadowRoot.querySelector("#department_id").value;
+      const departmentId =
+        this.shadowRoot.querySelector("#department_id").value;
       const file = this.shadowRoot.querySelector("#file-input").files[0];
-
 
       this.#upload(name, email, phone, departmentId, file);
 
@@ -52,7 +52,7 @@ class AddEmployeeCard extends HTMLElement {
 
   async #upload(name, email, phone, departmentId, file) {
     const api = new Api();
-    await api.add(name, email, phone, departmentId, file);;
+    await api.add(name, email, phone, departmentId, file);
   }
 
   #template() {
@@ -71,7 +71,7 @@ class AddEmployeeCard extends HTMLElement {
               }
           </style>
 
-      <div class='employee card'>
+      <div class='employee-card'>
         <form>
           <input class='name'  id='name'placeholder="Namn"></input>
           <input class='email' id='email' placeholder="Email"></input>
@@ -89,7 +89,5 @@ class AddEmployeeCard extends HTMLElement {
     return template;
   }
 }
-
-export { AddEmployeeCard };
 
 window.customElements.define("add-employee-card", AddEmployeeCard);
