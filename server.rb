@@ -67,14 +67,15 @@ class Server < Sinatra::Base
 
     #update
     patch '/api/employees/:id' do
+        name = params['name']
+        mail = params['mail']
+        phone = params['phone']
+        department_id = params['department_id']
+
         id = params['id']
-        payload = JSON.parse request.body.read # data sent using fetch is placed in request body
-        content_type :json
-        result = @db.execute('UPDATE employees
-                              SET name=?, email=?, phone=?, department_id=?, img=?
-                              WHERE id = ?',
-                              [payload['name'], payload['email'], payload['phone'], payload['department_id'], payload['img'], payload['id']])
-        return {result: 'success'}.to_json
+
+        @db.execute('UPDATE employees SET name=?, email=?, phone=?, department_id=?, WHERE id = ?', [name, mail, phone, department_id, id])
+        
     end
 
     post '/api/employees/' do

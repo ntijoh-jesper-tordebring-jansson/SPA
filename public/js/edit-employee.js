@@ -79,24 +79,22 @@ export class EditEmployeeCard extends HTMLElement {
       const name = this.shadowRoot.querySelector("#name").value;
       const email = this.shadowRoot.querySelector("#email").value;
       const phone = this.shadowRoot.querySelector("#phone").value;
-      const departmentId =
-        this.shadowRoot.querySelector("#department_id").value;
-      const file = this.shadowRoot.querySelector("#file-input").files[0];
+      const departmentId = this.shadowRoot.querySelector("#department_id").value;
 
-      this.#upload(name, email, phone, departmentId, file);
+      const id = e.target.shadowRoot.querySelector("div").getAttribute("data-id");
+
+      this.#upload(name, email, phone, departmentId, id);
 
       this.shadowRoot.querySelector("#name").value = "";
       this.shadowRoot.querySelector("#email").value = "";
       this.shadowRoot.querySelector("#phone").value = "";
       this.shadowRoot.querySelector("#department_id").value = "";
-      this.shadowRoot.querySelector("#file-input").file = "";
-      this.imageButton.src = "img/add image here.png";
     });
   }
 
-  async #upload(name, email, phone, departmentId, file) {
+  async #upload(name, email, phone, departmentId, id) {
     const api = new Api();
-    await api.add(name, email, phone, departmentId, file);
+    await api.update(name, email, phone, departmentId, id);
   }
 
   #template() {
@@ -144,9 +142,8 @@ export class EditEmployeeCard extends HTMLElement {
           <input class='department_id' id='department_id' placeholder="Department ID"></input>
 
           <img id="image-button" src="img/add image here.png" alt="Add Image" />
-          <input type="file" id="file-input" accept="image/*">
 
-          <button class="submit-button" id="submit-button">Lägg till</button>
+          <button class="submit-button" id="submit-button">Ändra</button>
 
         </form>
       </div>

@@ -40,6 +40,32 @@ class Api {
         console.error(error);
     }
   }
+
+  async update(name, mail, phone, department_id, id) {
+    console.log("Working on updating...");
+    const formName = name;
+    const formMail = mail;
+    const formPhone = phone;
+    const formDepartment_id = department_id;
+    const formId = id;
+
+    let formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("mail", mail);
+    formData.append("phone", phone);
+    formData.append("department_id", department_id);
+
+    console.log("chainging")
+    try {
+        const response = await fetch(`/api/employees/${formId}`, {
+          method: "PATCH",
+          body: formData,
+        });
+    } catch (error) {
+        console.error(error);
+    }
+  }
 }
 
 export { Api };
