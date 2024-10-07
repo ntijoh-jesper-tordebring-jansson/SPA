@@ -9,6 +9,7 @@ export class DeleteEmployeeCard extends HTMLElement {
     this.handleClick = (e) => {
       this.#delete(
         e.target.shadowRoot.querySelector("div").getAttribute("data-id"),
+        e,
       );
     };
   }
@@ -22,9 +23,10 @@ export class DeleteEmployeeCard extends HTMLElement {
     this.#parentHref.removeEventListener("click", this.handleClick);
   }
 
-  async #delete(id) {
+  async #delete(id, e) {
     const api = new Api();
     api.delete(id);
+    e.target.remove();
   }
 
   #template() {
