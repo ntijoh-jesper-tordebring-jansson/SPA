@@ -31,8 +31,14 @@ class Api {
     }
   }
 
-  async delete() {
-    console.log("delete");
+  async delete(id) {
+    try {
+        const response = await fetch(`/api/employees/${id}`, {
+          method: "DELETE",
+        });
+    } catch (error) {
+        console.error(error);
+    }
   }
 }
 
