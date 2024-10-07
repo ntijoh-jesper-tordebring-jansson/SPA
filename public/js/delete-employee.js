@@ -1,3 +1,5 @@
+import { Api } from "./api.js";
+
 export class DeleteEmployeeCard extends HTMLElement {
   constructor() {
     super();
@@ -5,7 +7,11 @@ export class DeleteEmployeeCard extends HTMLElement {
     this.shadowRoot.appendChild(this.#template().content.cloneNode(true));
   }
 
-  connectedCallback() {}
+  connectedCallback() {
+    this.parentNode.addEventListener("click", (e) => {
+      this.#delete(e.target.id);
+    });
+  }
 
   async #delete(id) {
     const api = new Api();

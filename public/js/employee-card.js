@@ -17,7 +17,6 @@ class EmployeeCard extends HTMLElement {
 
   #addHoverEffect() {
     const card = this.shadowRoot.querySelector("div");
-    console.log(card);
     card.addEventListener("mouseenter", () => {
       card.style.backgroundColor = "red"; // Change background on hover
     });

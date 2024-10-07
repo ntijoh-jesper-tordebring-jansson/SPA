@@ -30,6 +30,10 @@ class Api {
       console.error(error);
     }
   }
+
+  async delete() {
+    console.log("delete");
+  }
 }
 
 export { Api };
