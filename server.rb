@@ -71,10 +71,15 @@ class Server < Sinatra::Base
         mail = params['mail']
         phone = params['phone']
         department_id = params['department_id']
-
         id = params['id']
 
-        @db.execute('UPDATE employees SET name=?, email=?, phone=?, department_id=?, WHERE id = ?', [name, mail, phone, department_id, id])
+        puts name;
+        puts mail;
+        puts phone;
+        puts department_id;
+        puts id;
+
+        @db.execute('UPDATE employees SET name=?, email=?, phone=?, department_id=? WHERE id=?', [name, mail, phone, department_id, id])
         
     end
 
