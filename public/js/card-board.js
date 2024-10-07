@@ -48,7 +48,7 @@ class CardBoard extends HTMLElement {
   async #showAll(state) {
     const employees = await new Api().index();
     for (let i = 0; i < employees.length; i++) {
-      this.contentDiv.appendChild(new EmployeeCard(i, employees[i], state));
+      this.contentDiv.appendChild(new EmployeeCard(employees[i], state));
     }
   }
 

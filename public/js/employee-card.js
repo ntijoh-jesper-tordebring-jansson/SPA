@@ -1,8 +1,7 @@
 class EmployeeCard extends HTMLElement {
-  constructor(id, employee, state) {
+  constructor(employee, state) {
     super();
     this.attachShadow({ mode: "open" });
-    this.id = id;
     this.employee = employee;
     this.state = state;
     this.shadowRoot.appendChild(this.#template().content.cloneNode(true));
@@ -48,7 +47,7 @@ class EmployeeCard extends HTMLElement {
 
       </style>
 
-      <div class='employee-card' data-id="${this.id}">
+      <div class='employee-card' data-id="${this.employee.id}">
         <div>
           <h1 class='name'>${this.employee.name}</h1>
           <p class='email'>Email: ${this.employee.email}</p>

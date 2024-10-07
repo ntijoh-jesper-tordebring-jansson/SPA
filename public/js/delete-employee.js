@@ -24,7 +24,7 @@ export class DeleteEmployeeCard extends HTMLElement {
 
   async #delete(id) {
     const api = new Api();
-    await api.delete(id);
+    api.delete(id);
   }
 
   #template() {
