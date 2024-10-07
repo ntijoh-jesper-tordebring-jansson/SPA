@@ -20,7 +20,7 @@ export class EditEmployeeCard extends HTMLElement {
         .childNodes.forEach((element) => {
           if (element.nodeType == Node.TEXT_NODE) {
           } else {
-            this.infoList.push(element);
+            this.infoList.push(element.innerHTML);
           }
         });
 
@@ -34,13 +34,12 @@ export class EditEmployeeCard extends HTMLElement {
             .getAttribute("src"),
         );
 
-      console.log(
-        e.target.shadowRoot
-          .querySelector(".employee-card")
-          .querySelector("img"),
-      );
-      console.log(this.infoList);
-      console.log(this.infoList[4]);
+      this.shadowRoot.querySelector("#name").value = this.infoList[0];
+      this.shadowRoot.querySelector("#email").value = this.infoList[1];
+      this.shadowRoot.querySelector("#phone").value = this.infoList[2];
+      this.shadowRoot.querySelector("#department_id").value = this.infoList[3];
+
+      console.log(this.infoList[1]);
 
       this.parentNode.childNodes.forEach((element) => {
         if (element.id) {
@@ -128,7 +127,7 @@ export class EditEmployeeCard extends HTMLElement {
               }
 
               input {
-                display:
+
               }
           </style>
 
