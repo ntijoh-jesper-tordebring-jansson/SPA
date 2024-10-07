@@ -13,6 +13,28 @@ export class EditEmployeeCard extends HTMLElement {
   }
 
   connectedCallback() {
+    this.form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      console.log('ändrarar');
+      console.log(e);
+
+      const name = this.shadowRoot.querySelector("#name").value;
+      const email = this.shadowRoot.querySelector("#email").value;
+      const phone = this.shadowRoot.querySelector("#phone").value;
+      const departmentId = this.shadowRoot.querySelector("#department_id").value;
+
+      const id = e.getAttribute("data-id");
+
+      console.log(id);
+      this.#upload(name, email, phone, departmentId, id);
+
+      this.shadowRoot.querySelector("#name").value = "";
+      this.shadowRoot.querySelector("#email").value = "";
+      this.shadowRoot.querySelector("#phone").value = "";
+      this.shadowRoot.querySelector("#department_id").value = "";
+    });
+
     this.parentNode.addEventListener("click", (e) => {
       e.target.shadowRoot
         .querySelector(".employee-card")
@@ -70,24 +92,6 @@ export class EditEmployeeCard extends HTMLElement {
 
         reader.readAsDataURL(file);
       }
-    });
-
-    this.form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const name = this.shadowRoot.querySelector("#name").value;
-      const email = this.shadowRoot.querySelector("#email").value;
-      const phone = this.shadowRoot.querySelector("#phone").value;
-      const departmentId = this.shadowRoot.querySelector("#department_id").value;
-
-      const id = e.target.shadowRoot.querySelector("div").getAttribute("data-id");
-
-      this.#upload(name, email, phone, departmentId, id);
-
-      this.shadowRoot.querySelector("#name").value = "";
-      this.shadowRoot.querySelector("#email").value = "";
-      this.shadowRoot.querySelector("#phone").value = "";
-      this.shadowRoot.querySelector("#department_id").value = "";
     });
   }
 
