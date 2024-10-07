@@ -7,7 +7,9 @@ export class DeleteEmployeeCard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(this.#template().content.cloneNode(true));
     this.handleClick = (e) => {
-      this.#delete(e.target.id);
+      this.#delete(
+        e.target.shadowRoot.querySelector("div").getAttribute("data-id"),
+      );
     };
   }
 
