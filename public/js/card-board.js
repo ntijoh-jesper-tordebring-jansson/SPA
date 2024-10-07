@@ -1,6 +1,7 @@
 import { Api } from "./api.js";
 import { AddEmployeeCard } from "./add-employee.js";
 import { DeleteEmployeeCard } from "./delete-employee.js";
+import { EditEmployeeCard } from "./edit-employee.js";
 
 class CardBoard extends HTMLElement {
   constructor() {
@@ -13,6 +14,7 @@ class CardBoard extends HTMLElement {
     this.addEmployeeButton = this.shadowRoot.querySelector("#add-employee");
     this.deleteEmployeeButton =
       this.shadowRoot.querySelector("#delete-employee");
+    this.editEmployeeButton = this.shadowRoot.querySelector("#edit-employee");
     this.tillbaksButton = this.shadowRoot.querySelector("#tillbaka");
   }
 
@@ -35,6 +37,12 @@ class CardBoard extends HTMLElement {
       this.#deleteEmployee();
       this.#otherPages();
     });
+
+    this.editEmployeeButton.addEventListener("click", () => {
+      this.#showAll("edit");
+      this.#editEmployee();
+      this.#otherPages();
+    });
   }
 
   async #showAll(state) {
@@ -51,6 +59,10 @@ class CardBoard extends HTMLElement {
   async #deleteEmployee() {
     this.#showAll("delete");
     this.contentDiv.appendChild(new DeleteEmployeeCard());
+  }
+
+  async #editEmployee() {
+    this.contentDiv.appendChild(new EditEmployeeCard());
   }
 
   #startPage() {
@@ -77,7 +89,7 @@ class CardBoard extends HTMLElement {
           <button class="startPage" id="show-all">Visa alla</button>
           <button class="startPage" id="add-employee">Lägg till</button>
           <button class="startPage" id="delete-employee">Ta bort</button>
-          <button class="startPage">Ändra</button>
+          <button class="startPage" id="edit-employee">Ändra</button>
           <button id="tillbaka" style="display: none;">Tillbaka</button>
         </div>
 
