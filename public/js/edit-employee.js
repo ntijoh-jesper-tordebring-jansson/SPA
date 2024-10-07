@@ -46,7 +46,6 @@ export class EditEmployeeCard extends HTMLElement {
         ?.trim();
 
       this.parentNode.childNodes.forEach((element) => {
-        console.log(element);
         if (element.shadowRoot) {
           element.style.display = "none";
         }
@@ -144,7 +143,6 @@ export class EditEmployeeCard extends HTMLElement {
           <input class='department_id' id='department_id' placeholder="Department ID"></input>
 
           <img id="image-button" src="img/add image here.png" alt="Add Image" />
-          <input type="file" id="file-input" accept="image/*">
 
           <button class="submit-button" id="submit-button">Lägg till</button>
 
