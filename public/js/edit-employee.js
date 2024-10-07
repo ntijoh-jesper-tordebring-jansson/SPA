@@ -46,7 +46,6 @@ export class EditEmployeeCard extends HTMLElement {
         ?.trim();
 
       this.parentNode.childNodes.forEach((element) => {
-        console.log(element);
         if (element.shadowRoot) {
           element.style.display = "none";
         }
