@@ -1,5 +1,5 @@
 require 'debug'
-require 'uuid'
+require 'uuidtools'
 # use binding.break for debug
 
 class Server < Sinatra::Base
@@ -77,9 +77,6 @@ class Server < Sinatra::Base
         return {result: 'success'}.to_json
     end
 
-
-
-
     post '/api/employees/' do
         uploadDir = './public/img/'
       
@@ -88,63 +85,19 @@ class Server < Sinatra::Base
         phone = params['phone']
         department_id = params['department_id']
         
-        file = params['file'] # Det här hämtar filinformationen som ett Hash-objekt
-      
-        if file && file[:tempfile] # Kontrollera att filen och tempfilen finns
-          filename = file[:filename] || "hej.jpg"  # Om inget filnamn finns, använd "hej.jpg"
-          tempfile = file[:tempfile]               # Tempfilen där filen lagras temporärt
-      
-          # Sökvägar
-          filepath = File.join(uploadDir, filename)
-          relpath = "/img/#{filename}"
-      
-          # Kopiera filen från tempfilen till slutdestinationen
-          FileUtils.cp(tempfile.path, filepath)
-      
-          status 200
-          return { message: 'File uploaded successfully', path: relpath }.to_json
-        else
-          status 400
-          return { error: 'No file uploaded' }.to_json
-        end
-      end
+        file = params['file']
 
+        filename = UUIDTools::UUID.random_create.to_s
 
+        tempfile = file[:tempfile]
 
-    #create
-    # post '/api/employees/' do
+        filepath = File.join(uploadDir, filename)
 
-    #     uploadDir = './public/img/'
+        FileUtils.cp(tempfile.path, filepath)
 
-    #     name = params['name']
-    #     mail = params['mail']
-    #     phone = params['phone']
-    #     department_id = params['department_id']
-    #     file = params['file']
-    #     filename = "hej.jpg"
+        @db.execute('INSERT into employees (name, email, phone, department_id, img) VALUES (?,?,?,?,?)', [name, mail, phone, department_id, filename])
 
-    #     tempfile = file['tempfile']
-
-
-    #     filepath = File.join(uploadDir, filename)
-    #     relpath = "/img/#{filename}"
-
-    #     FileUtils.cp(tempfile.path, filepath)
-        
-    #     # filename = "#{next_id}.png"
-
-    #     # uuid.
-
-        
-
-    #     # payload = JSON.parse request.body.read
-
-    #     # content_type :json
-    #     # result = @db.execute('INSERT into employees (name, email, phone, department_id, img)
-    #     #                       VALUES (?,?,?,?,?)',[
-    #     #                       payload['name'], payload['email'], payload['phone'], payload['department_id'], payload['img']])
-    #     # return {result: 'success'}.to_json
-    # end
+    end
 
     #destroy
     delete '/api/employees/:id' do

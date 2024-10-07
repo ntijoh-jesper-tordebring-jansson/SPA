@@ -55,7 +55,7 @@ class EmployeeCard extends HTMLElement {
           <p class='phone'>Number: ${this.employee.phone}</p>
           <p class='department_id'>Department ID: ${this.employee.department_id}</p>
         </div>
-          <img src='img/${this.employee.img}.jpg'>
+          <img src='img/${this.employee.img}'>
 
       </div>
             `;
