@@ -35,14 +35,19 @@ export class EditEmployeeCard extends HTMLElement {
         );
 
       this.shadowRoot.querySelector("#name").value = this.infoList[0];
-      this.shadowRoot.querySelector("#email").value = this.infoList[1];
-      this.shadowRoot.querySelector("#phone").value = this.infoList[2];
-      this.shadowRoot.querySelector("#department_id").value = this.infoList[3];
-
-      console.log(this.infoList[1]);
+      this.shadowRoot.querySelector("#email").value = this.infoList[1]
+        .split("Email: ")[1]
+        ?.trim();
+      this.shadowRoot.querySelector("#phone").value = this.infoList[2]
+        .split("Number: ")[1]
+        ?.trim();
+      this.shadowRoot.querySelector("#department_id").value = this.infoList[3]
+        .split("Department ID: ")[1]
+        ?.trim();
 
       this.parentNode.childNodes.forEach((element) => {
-        if (element.id) {
+        console.log(element);
+        if (element.shadowRoot) {
           element.style.display = "none";
         }
       });
@@ -138,7 +143,7 @@ export class EditEmployeeCard extends HTMLElement {
           <input class='phone' id='phone' placeholder="Phone"></input>
           <input class='department_id' id='department_id' placeholder="Department ID"></input>
 
-          <img id="image-button" src="img/add image here.png}" alt="Add Image" />
+          <img id="image-button" src="img/add image here.png" alt="Add Image" />
           <input type="file" id="file-input" accept="image/*">
 
           <button class="submit-button" id="submit-button">Lägg till</button>
